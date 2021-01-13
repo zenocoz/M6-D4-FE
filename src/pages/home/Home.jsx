@@ -18,8 +18,11 @@ export default class Home extends Component {
       const response = await fetch("http://localhost:3001/articles")
       if (response.ok) {
         const articles = await response.json()
-        this.setState({ articles: articles })
         console.log(articles)
+        this.setState({ articles: articles })
+      } else {
+        const err = await response.json()
+        console.log(err)
       }
     } catch (error) {
       console.log(error)
@@ -70,7 +73,7 @@ export default class Home extends Component {
               {this.state.articles.length > 0 &&
                 this.state.articles.map((article) => (
                   <ArticleListItem
-                    articleImg={article.category.img}
+                    articleImg={"top"}
                     headingFont={"large"}
                     subheading
                     article={article}
